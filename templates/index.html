@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+<title>Captcha App</title>
+</head>
+<body>
+<h1>Captcha App</h1>
+<form action="/recognize" method="post">
+  CAPTCHA image URL: <input id="imageurl" type="text" name="imageurl">
+  <button type="button" onclick="getUrl()">Get URL</button>
+  <br/>
+  <input type="submit" value="Recognize">
+</form>
+<script>
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function getUrl() {
+    captcha_url = httpGet("/get_url");
+    textInput = document.getElementById("imageurl");
+    textInput.value = captcha_url;
+}
+  </script>
+</body>
+</html>
